@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+  <meta name="keywords" content="Cartao, Visita, Presente, Digital, Anuncio, Comercial, Marketing">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cartão LinkMunity</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6b6894">
+</head>
+
+<body>
+  <!-- FUNDO -->
+  <div class="background-overlay"></div>
+
+  <!-- OVERLAY DE BOAS-VINDAS COM INPUT -->
+  <div id="welcome-overlay" class="welcome-overlay">
+    <div class="welcome-box">
+      <h2>👋 Ei! Que bom ver você aqui :)</h2>
+      <p>Como você se chama?</p>
+      <input type="text" id="userName" placeholder="Digite seu nome..." />
+      <button onclick="salvarNome()">Entrar</button>
+    </div>
+  </div>
+
+  <!-- WRAPPER GERAL: cartão + descrição -->
+  <div class="main-wrapper">
+
+    <!-- CARTÃO -->
+    <div class="card-container" onclick="this.classList.toggle('flipped')">
+      <div class="card">
+
+        <!-- Frente -->
+        <div class="card-face card-front">
+          <img src="./Components/IMG/LogoMunity.svg" alt="Logo LinkMunity" class="logo">
+          <img src="./Components/IMG/NomeLink.svg" alt="LinkMunity nome" class="title">
+          <p class="subtitle">Linkando Comunidades!</p>
+          <p id="userDisplayName" class="personalized-name"></p> <!-- Nome personalizado aqui -->
+          <a target="_blank" href="https://link-munity.github.io/LinkMunity-Page/">
+            <button class="cta-button">Clique para saber mais</button>
+          </a>
+        </div>
+
+        <!-- Verso -->
+        <div class="card-face card-back">
+          <h2>🌍 Faça parte da nova era das comunidades</h2>
+          <ul class="info-list">
+            <li>
+              <span class="info-title">🔗 Mercado local:</span>
+              <span class="info-desc">Divulgue e encontre serviços perto de você.</span>
+            </li>
+            <li>
+              <span class="info-title">📅 Eventos & Ações:</span>
+              <span class="info-desc">Descubra o que acontece no seu bairro.</span>
+            </li>
+            <li>
+              <span class="info-title">📢 Alertas & avisos:</span>
+              <span class="info-desc">Fique por dentro do que importa.</span>
+            </li>
+            <li>
+              <span class="info-title">🛩️ Para quem é?</span>
+              <span class="info-desc">Moradores, ONGs e comércios que querem transformar o lugar onde vivem.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DESCRIÇÃO DO LADO -->
+    <div class="side-description" id="sideDesc">
+      🎁 Ao tocar no botão, você pode participar de um sorteio exclusivo!<br>
+      Cadastre-se pelo nosso site e aproveite.<br><br>
+      👉 Não se esqueça de tocar no cartão para ver o verso ;)
+    </div>
+
+    <!-- BOTÕES DE AÇÃO -->
+    <div class="actions">
+      <button id="installBtn" style="display: none;">📲 Salvar no celular</button>
+
+      <a href="./assets/linkmunity_cartao.vcf" download>
+        <button>💾 Salvar contato</button>
+      </a>
+
+      <button onclick="compartilhar()">📤 Compartilhar cartão</button>
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Quando a página carregar, verifica se já tem nome salvo
+    window.onload = function () {
+      const nomeSalvo = localStorage.getItem('nomeVisitante');
+      if (nomeSalvo) {
+        document.getElementById('welcome-overlay').style.display = 'none';
+        mostrarMensagem(nomeSalvo);
+      }
+    };
+
+    function salvarNome() {
+      const nome = document.getElementById('userName').value.trim();
+      if (nome) {
+        localStorage.setItem('nomeVisitante', nome); // Salva para visitas futuras
+        document.getElementById('welcome-overlay').style.display = 'none';
+        mostrarMensagem(nome);
+      }
+    }
+
+    function mostrarMensagem(nome) {
+      const sideDesc = document.getElementById('sideDesc');
+      sideDesc.innerHTML = `
+        👋 Olá, <strong>${nome}</strong>! Este é o seu cartão de visitas da <span style="color: var(--laranja)">LinkMunity</span>!<br><br>
+        🎁 Ao tocar no botão, você pode participar de um sorteio exclusivo!<br>
+        Cadastre-se pelo nosso site e aproveite.<br><br>
+        👉 Não se esqueça de tocar no cartão para ver o verso ;)
+      `;
+      document.getElementById('userDisplayName').textContent = nome;
+    }
+  </script>
+
+  <script>
+    // Instalação PWA
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('installBtn');
+      installBtn.style.display = 'inline-block';
+
+      installBtn.addEventListener('click', () => {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+          deferredPrompt = null;
+          installBtn.style.display = 'none';
+        });
+      });
+    });
+
+    // Registrar Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(() => console.log('✅ Service Worker registrado'))
+        .catch(err => console.error('Erro ao registrar SW:', err));
+    }
+
+    // Compartilhar
+    function compartilhar() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Cartão LinkMunity',
+          text: 'Veja o cartão digital da LinkMunity!',
+          url: window.location.href
+        })
+        .then(() => console.log('Compartilhado!'))
+        .catch(error => console.log('Erro no compartilhamento:', error));
+      } else {
+        alert("Seu navegador não suporta compartilhamento automático.");
+      }
+    }
+  </script>
+</body>
+</html>

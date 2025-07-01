@@ -1,0 +1,428 @@
+/* Paleta LinkMunity */
+:root {
+  --azul-violeta: #6256e8;
+  --roxo-escuro: #201e33;
+  --rosa-gelo: #dfd6d6;
+  --lavanda: #6d66bd;
+  --azul-fosco: #6b6894;
+  --branco: #f5f5f5;
+  --cinza-profundo: #302f3d;
+  --laranja: #ebba0b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-image: url(./Components/IMG/FundoMunity.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content:space-around;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+
+
+.main-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 150px;
+  padding: 10px;
+  flex-wrap: wrap; /* Responsivo */
+}
+
+.side-description {
+  max-width: 500px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 1.4;
+  background-color: rgba(24, 1, 54, 0.40); /* Fundo com 10% de opacidade */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 40px rgba(112, 10, 220, 0.1); /* Roxo com leve opacidade */
+}
+
+
+
+
+
+
+.background-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent),
+              url('background-pattern.svg') center/cover no-repeat;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.card-container {
+  perspective: 1500px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.card {
+  width: 360px;
+  height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease;
+}
+
+.card-container.flipped .card {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.5s ease;
+}
+
+.card-front {
+  background-image: url(./Components/IMG/CapaDoCard.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: var(--roxo-escuro);
+}
+
+.card-back {
+  background-image: url(./Components/IMG/VersoDoCard.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: 25px;
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card-back h2 {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 0.5;
+  color: var(--branco);
+  margin-top: 40px;
+}
+
+.info-list {
+  font-size: 9px;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-list li {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0 10px;
+  gap: 10px
+}
+
+.info-title {
+  font-weight: bold;
+  color: var(--branco);
+  min-width: 130px; /* força alinhamento dos títulos */
+  font-size: 13px;
+}
+
+.info-desc {
+  font-size: 12px;
+  color: var(--branco);
+  line-height: 1.3;
+  flex: 1;
+}
+
+
+
+
+/* .info-list li::before {
+  content: '•';
+  color: var(--laranja);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+} */
+
+
+.small {
+  font-size: 11px;
+  color: #cfcfcf;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+.logo {
+  width: 60px;
+  margin-top: 80px;
+  line-height: 0.9px;
+  max-height: 50px;
+}
+
+.title {
+  font-size: 13px;
+  height: 50px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--branco);
+  height: 30px;
+}
+
+.cta-button {
+  padding: 10px 18px;
+  background: var(--laranja);
+  border: none;
+  border-radius: 8px;
+  color: var(--roxo-escuro);
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 0 0 transparent;
+  margin-bottom: 80px;
+  max-height: 40px;
+}
+
+.cta-button:hover {
+  background: #ffc107;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .main-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 10px;
+    text-align: center;
+  }
+
+  .card-back {
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  height: 100%; 
+}
+
+ .card-back ul{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  height: 150%; 
+}
+
+  
+
+  .side-description {
+    max-width: 90%;
+    font-size: 18px;
+    padding: 12px;
+    line-height: 1.4;
+  }
+
+  .card {
+    margin-top: 30px;
+    width: 90vw;
+    height: 240px;
+    max-width: 360px;
+    aspect-ratio: 16/10;
+  }
+
+  .card-face {
+    padding: 16px;
+  }
+}
+
+.actions #installBtn {
+  font-size: 15px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  align-items: center;
+  z-index: 1;
+}
+
+.actions button, .actions a button {
+  background-color: var(--azul-fosco);
+  color: var(--branco);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  font-size: 25px;
+}
+
+.actions button:hover {
+  background-color: var(--lavanda);
+  transform: scale(1.05);
+}
+
+.actions a {
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .actions {
+    width: 70%;
+    gap: 10px;
+  }
+
+  .actions button {
+    width: 100%;
+    font-size: 15px;
+    padding: 8px;
+  }
+}
+
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(32, 30, 51, 0.95); /* fundo roxo petróleo escuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.welcome-box {
+  background-color: var(--azul-fosco);
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--branco);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  max-width: 90%;
+  width: 400px;
+}
+
+.welcome-box input {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 12px;
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.welcome-box button {
+  padding: 10px 18px;
+  background-color: var(--laranja);
+  color: var(--roxo-escuro);
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.welcome-box button:hover {
+  background-color: #ffc107;
+  transform: scale(1.05);
+}
+
+.personal-msg {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--azul-fosco);
+  color: var(--branco);
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .personal-msg {
+    font-size: 14px;
+    top: 10px;
+    left: 10px;
+    padding: 8px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-box {
+    width: 90%;
+    max-width: 320px;
+    padding: 20px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin-right: 35px;
+  }
+
+
+  .welcome-box input {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .welcome-box button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .personalized-name {
+  color: var(--branco);
+  font-size: 17px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 5px;
+}
+
+}
+
+.personalized-name {
+  color: var(--branco);
+  font-weight: bolder;
+  font-size: 20px;
+  text-align: center;
+  height: 10px;
+}
