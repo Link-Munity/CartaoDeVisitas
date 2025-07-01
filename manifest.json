@@ -8,12 +8,12 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logoMunity.png",
+      "src": "https://link-munity.github.io/CartaoDeVisitas/logoMunity.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "logoMunity.png",
+      "src": "https://link-munity.github.io/CartaoDeVisitas/logoMunity.png",
       "sizes": "512x512",
       "type": "image/png"
     }
