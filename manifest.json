@@ -1,7 +1,8 @@
 {
   "name": "Cartão LinkMunity",
   "short_name": "LinkMunity",
-  "start_url": ".",
+  "start_url": "https://link-munity.github.io/CartaoDeVisitas/",
+  "scope": "https://link-munity.github.io/CartaoDeVisitas/",
   "display": "standalone",
   "background_color": "#6b6894",
   "theme_color": "#6b6894",
