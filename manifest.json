@@ -1,22 +1,21 @@
 {
   "name": "Cartão LinkMunity",
   "short_name": "LinkMunity",
-  "start_url": "https://link-munity.github.io/CartaoDeVisitas/",
-  "scope": "https://link-munity.github.io/CartaoDeVisitas/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#6b6894",
   "theme_color": "#6b6894",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "logoMunity.svg",
+      "src": "logo192.png",
       "sizes": "192x192",
-      "type": "image/svg"
+      "type": "image/png"
     },
     {
-      "src": "logoMunity.svg",
+      "src": "logo512.png",
       "sizes": "512x512",
-      "type": "image/svg"
+      "type": "image/png"
     }
   ]
 }
