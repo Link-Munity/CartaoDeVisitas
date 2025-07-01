@@ -304,6 +304,7 @@ body {
   .actions {
     width: 70%;
     gap: 10px;
+    margin-bottom: 50px;
   }
 
   .actions button {
